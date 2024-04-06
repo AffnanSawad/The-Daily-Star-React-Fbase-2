@@ -1,11 +1,24 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Providers/Authproviders";
 
 const Nav = () => {
+
+    const { user , logout } = useContext(AuthContext) 
+    
+    const handlelogout = () => {
+      logout()
+      .then()
+      .catch()
+    }
+
     const links = <>
     
     <li className="text-xl" > <NavLink to='/'>Home</NavLink> </li>
     <li className="text-xl" > <NavLink to='/about'>About</NavLink> </li>
     <li className="text-xl" > <NavLink to='/career'>Career</NavLink> </li>
+    <li className="text-xl" > <NavLink to='/login'>Log In</NavLink> </li>
+    <li className="text-xl" > <NavLink to='/register'>Register</NavLink> </li>
     
     </>
     return (
@@ -32,10 +45,20 @@ const Nav = () => {
           <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
         </div>
       </div>
-    <Link> 
+
+    {
+      user ?
+
+      <button onClick={handlelogout} className="btn">Sign Out</button>
+     :
+     <Link to='/login' > 
     
      <button className="btn">LOG IN</button>
      </Link>
+    }
+
+
+   
   </div>
 </div>        </div>
     );
